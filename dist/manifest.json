@@ -4,7 +4,8 @@
     "description": "Extension that helps to manage SFCC logs",
     "content_scripts": [{
        "matches": ["*://*.demandware.net/*.log"],
-       "js": ["js/content.js"] 
+       "js": ["content.js"],
+       "css": ["styles.css"]
     }],
     "permissions": [
         "*://*/*",
