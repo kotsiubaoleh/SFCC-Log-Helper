@@ -1,13 +1,15 @@
 import { parse } from './parser';
 
 export const data = {
-    logs: []
+    logs: [],
+    rawLog: null
 };
 
 export function init(logString) {
     parse(logString, function(log) {
         addLog(log);
     });
+    data.rawLog = logString;
 }
 
 function addLog(logEntry) {

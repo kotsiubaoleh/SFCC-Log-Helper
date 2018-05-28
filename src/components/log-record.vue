@@ -2,26 +2,32 @@
     <div class="log-container" @click="opened = !opened">
         <div class='cause'>{{log.cause}}</div>
         <div>Entries: {{log.entries.length}}</div>
-        <div v-if="opened">{{log.stackTrace.lines}}</div>
+        <stack-trace v-bind:stack="log.stackTrace"/>
     </div>
 </template>
 
 <script>
-export default {
-    props: ['log'],
-    data: function (){
-        return {opened: false}
+    import stackTrace from './stack-trace.vue';
+
+    export default {
+        props: ['log'],
+        data: function (){
+            return {opened: false}
+        },
+        components: {
+            'stack-trace': stackTrace
+        }
     }
-}
 </script>
 
 <style>
     .log-container {
         margin: 20px 40px;
         padding: 20px 30px;
-        background: #f7f7f7;
-        color: #3a3a3a;
-        border-radius: 10px;
+        background: #f9f9f9;
+        border-radius: 0px;
+        box-shadow: -4px 5px 9px 0px #9e9e9e5c;
+        border: 1px solid #e4dede;
     }
 
     .cause {
