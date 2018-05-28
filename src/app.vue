@@ -4,12 +4,12 @@
             <main-menu v-bind:isTurnedOn.sync="isTurnedOn"/>
         </menu>
         <div clas="content">
-            <div v-if="isTurnedOn" class="log-list">
+            <div v-show="isTurnedOn" class="log-list">
                 <log-record v-for="(log, index) in data.logs" v-bind:key="index" v-bind:log="log"/>
             </div>
-            <div v-else>
+            <pre v-show="!isTurnedOn" class="raw-log">
                 {{data.rawLog}}
-            </div>
+            </pre>
         </div>
     </div>
 </template>
@@ -33,7 +33,7 @@
 </script>
 
 <style lang="scss">
-    $menu-height: 60px;
+    $menu-height: 40px;
 
     body {
         margin: 0px;
@@ -51,8 +51,14 @@
 
     .log-list {
         margin-top: $menu-height;
-        padding-top: 50px;
+        padding-top: 15px;
         background: #dde0e8;
         font-family: "Courier New", Courier, monospace;
+    }
+
+    .raw-log {
+        margin: $menu-height 8px 0;
+        word-wrap: break-word;
+        white-space: pre-wrap;
     }
 </style>
