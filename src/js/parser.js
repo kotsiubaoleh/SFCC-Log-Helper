@@ -1,4 +1,4 @@
-const regularExpression = new RegExp(require('../res/regex.txt'),'g');
+import { logRecordRegExp } from '../res/regexps';
 
 function parseLogRecord(match) {
     return {
@@ -27,7 +27,7 @@ function parseLogRecord(match) {
 
 export function parse(rawLog, callback) {
     let match;
-    while(match = regularExpression.exec(rawLog)) {
+    while(match = logRecordRegExp.exec(rawLog)) {
         callback(parseLogRecord(match));
     }
 }
