@@ -2,6 +2,9 @@
     <div class="log-container" @click="opened = !opened">
         <div class='cause'>{{log.cause}}</div>
         <div>Entries: {{log.entries.length}}</div>
+        <!-- <ul v-show="opened">
+            <li v-for="(entry, index) in log.entries" v-bind:key="index">{{entry.fullText}}</li>
+        </ul> -->
         <stack-trace v-bind:stack="log.stackTrace"/>
     </div>
 </template>

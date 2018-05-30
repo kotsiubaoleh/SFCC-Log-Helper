@@ -1,5 +1,7 @@
 import { parse } from './parser';
 
+let warningCount = 0;
+
 export const data = {
     logs: [],
     rawLog: null
@@ -12,17 +14,33 @@ export function init(logString) {
     data.rawLog = logString;
 }
 
-function addLog(logEntry) {
-    let existingLogEntry = data.logs.find(entry => {
-        if (entry.stackTrace.id && logEntry.stackTrace.id) {
-            return entry.stackTrace.id === logEntry.stackTrace.id;
-        } else {
-            return entry.cause === logEntry.cause;
-        }
+function addLog(logRecord) {
+    let existingLogRecord = data.logs.find(record => {
+        let logEntry = logRecord.entries[0];
+        let existingEntry = record.entries.find(entry => {
+            if (entry.stackTrace.id && logEntry.stackTrace.id) {
+                if (entry.stackTrace.id === logEntry.stackTrace.id) {
+                    return true;
+                } else if (entry.stackTrace.lines && logEntry.stackTrace.lines) {
+                    if (entry.stackTrace.lines[0] === logEntry.stackTrace.lines[0]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        })
+        return existingEntry;
     });
-    if (existingLogEntry) {
-        existingLogEntry.entries.push(logEntry.entries[0]);
+    if (existingLogRecord) {
+        const logEntry = logRecord.entries[0];
+        existingLogRecord.entries.push(logEntry);
+        if (logEntry.stackTrace.lines) {
+            existingLogRecord.stackTrace = logEntry.stackTrace;
+        }
     } else {
-        data.logs.push(logEntry);
+        if (!logRecord.entries[0].stackTrace.lines) {
+            console.warn(++warningCount, logRecord.entries[0].fullText);
+        }
+        data.logs.push(logRecord);
     }
 }

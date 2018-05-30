@@ -1,24 +1,36 @@
 import { logRecordRegExp } from '../res/regexps';
 
 function parseLogRecord(match) {
+    const stackTraceLines = match[18] ? match[18].split('\n') : null;
     return {
         entries: [{
+            fullText: match[0],
             time: match[1],
-            requestID: match[4],
-            sessionType: match[5],
-            sessionID: match[6],
-            serverName: match[7],
-            serverPort: match[8],
-            URI: match[9],
-            method: match[10],
-            pathInfo: match[11],
-            queryString: match[12],
-            remoteAddress: match[13],
-            params: match[14],
+            system: {
+                requestID: match[4],
+                sessionType: match[5],
+                sessionID: match[6],
+                customer: match[7],
+                login: match[8],
+                serverName: match[9],
+                serverPort: match[10],
+            },
+            request: {
+                URI: match[11],
+                method: match[12],
+                pathInfo: match[13],
+                queryString: match[14],
+                remoteAddress: match[15],
+            },
+            params: match[16],
+            stackTrace: {
+                id: match[17],
+                lines: stackTraceLines
+            }
         }],
         stackTrace: {
-            id: match[15],
-            lines: match[16]
+            id: match[17],
+            lines: stackTraceLines
         },
         type: match[2],
         cause: match[3]

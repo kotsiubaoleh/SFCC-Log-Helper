@@ -1,7 +1,8 @@
 <template>
     <div>
-        <template v-if="stack.lines">
+        <template v-if="stack && stack.lines">
             <button v-on:click="isShown=!isShown">{{isShown ? 'Hide StackTrace' : 'Show StackTrace'}}</button>
+            <div>ID: {{stack.id}}</div>
             <transition name="slide">
                 <div v-if="isShown" class="stack-trace">
                     {{stack.lines}}
