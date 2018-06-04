@@ -5,7 +5,7 @@ function parseLogRecord(match) {
     return {
         entries: [{
             fullText: match[0],
-            time: match[1],
+            time: new Date(match[1]),
             system: {
                 requestID: match[4],
                 sessionType: match[5],

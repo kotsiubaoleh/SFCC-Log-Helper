@@ -1,24 +1,36 @@
 <template>
     <div class="log-container" @click="opened = !opened">
+        <div>{{lastTime}}</div>
         <div class='cause'>{{log.cause}}</div>
         <div>Entries: {{log.entries.length}}</div>
-        <!-- <ul v-show="opened">
-            <li v-for="(entry, index) in log.entries" v-bind:key="index">{{entry.fullText}}</li>
-        </ul> -->
-        <stack-trace v-bind:stack="log.stackTrace"/>
+        <ul v-show="opened">
+            <entry v-for="(entry, index) in log.entries" v-bind:key="index" v-bind:entry="entry"/>
+        </ul>
     </div>
 </template>
 
 <script>
     import stackTrace from './stack-trace.vue';
+    import entry from './entry.vue';
+    import { toTimeString } from '../js/util';
 
     export default {
         props: ['log'],
         data: function (){
             return {opened: false}
         },
+        computed: {
+            lastTime: function () {
+                const entries = this.log.entries;
+                return toTimeString(entries[entries.length - 1].time);
+            }
+        },
+        methods: {
+            toTimeString
+        },
         components: {
-            'stack-trace': stackTrace
+            'stack-trace': stackTrace,
+            'entry': entry
         }
     }
 </script>

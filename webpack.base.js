@@ -38,6 +38,12 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2|svg)$/,
+                use: {
+                    loader: 'url-loader'
+                }
             }
         ]
     },

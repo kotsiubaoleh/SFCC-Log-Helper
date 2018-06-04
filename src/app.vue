@@ -33,16 +33,22 @@
 </script>
 
 <style lang="scss">
+    @import './css/variables.scss';
+    @import './css/fontawesome.css';
+    @import './css/fa-regular.css';
+    @import url('https://fonts.googleapis.com/css?family=Space+Mono');
+
     $menu-height: 40px;
 
     body {
         margin: 0px;
+        font-family: 'Space Mono', monospace;
     }
 
     .menu {
         background: #fafafa;
         height: $menu-height;
-        border-bottom: 1px solid #dde0e8;
+        border-bottom: 1px solid $color-gray;
         position: fixed;
         top: 0;
         margin: 0;
@@ -53,7 +59,6 @@
         margin-top: $menu-height;
         padding-top: 15px;
         background: #dde0e8;
-        font-family: "Courier New", Courier, monospace;
     }
 
     .raw-log {
