@@ -20,6 +20,7 @@ function addLog(logRecord) {
         let existingEntry = record.entries.find(entry => {
             if (entry.stackTrace.id && logEntry.stackTrace.id) {
                 if (entry.stackTrace.id === logEntry.stackTrace.id) {
+                    logEntry.stackTrace.lines = entry.stackTrace.lines;
                     return true;
                 } else if (entry.stackTrace.lines && logEntry.stackTrace.lines) {
                     if (entry.stackTrace.lines[0] === logEntry.stackTrace.lines[0]) {

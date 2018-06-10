@@ -22,7 +22,7 @@ function parseLogRecord(match) {
                 queryString: match[14],
                 remoteAddress: match[15],
             },
-            params: match[16],
+            params: match[16] && match[16].split(' '),
             stackTrace: {
                 id: match[17],
                 lines: stackTraceLines
