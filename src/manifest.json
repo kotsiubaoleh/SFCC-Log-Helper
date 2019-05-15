@@ -2,10 +2,18 @@
     "name": "SFCC Log helper",
     "version": "1.0",
     "description": "Extension that helps to manage SFCC logs",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
     "content_scripts": [{
        "matches": ["*://*.demandware.net/*.log"],
-       "js": ["js/content.js"] 
+       "js": ["content.js"]
     }],
+    "browser_action" : {
+        "default_title": "SFCC Log Helper",
+        "default_popup": "popup.html"
+    },
     "permissions": [
         "*://*/*",
         "webRequest"

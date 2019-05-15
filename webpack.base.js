@@ -1,13 +1,17 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        content: './src/js/content.js'
+        content: './src/js/content.js',
+        popup: './src/popup',
+        background: './background.js'
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
     },
     module: {
@@ -54,8 +58,17 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css'
+            filename: '[name]styles.css'
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyPlugin([{
+            from: './src/manifest.json',
+            to: './manifest.json'
+        }]),
+        new HtmlWebpackPlugin({
+            filename: 'popup.html',
+            chunks: ['popup'],
+            template: 'src/template/index.html'
+        })
     ]
 };

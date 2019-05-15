@@ -30,11 +30,9 @@
     @import './css/fa-regular.css';
     @import url('https://fonts.googleapis.com/css?family=Lato');
 
-
     body {
         margin: 0px;
-        font-family: 'Lato', sans-serif;
-        background: $color-background;
+        //font-family: 'Lato', sans-serif;
     }
 
     .raw-log {

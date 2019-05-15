@@ -18,9 +18,5 @@ export default {
 </script>
 
 <style>
-    .stack-trace {
-        font-size: 10px;
-        overflow: hidden;
-        max-height: 3000px;
-    }
+
 </style>
