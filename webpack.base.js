@@ -6,9 +6,9 @@ const HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        content: './src/js/content.js',
+        app: './src/app',
         popup: './src/popup',
-        background: './background.js'
+        background: './src/background.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -68,6 +68,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'popup.html',
             chunks: ['popup'],
+            template: 'src/template/index.html'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'app.html',
+            chunks: ['app'],
             template: 'src/template/index.html'
         })
     ]

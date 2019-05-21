@@ -1,18 +1,23 @@
 <template>
     <div class="container">
-        <ul>
-            <li v-for="(sandbox, index) in sandboxes" :key="index">
-                <a href="#">{{sandbox.domain}}</a>
-                <button @click="removeSandbox(index)">X</button>
-            </li>
-        </ul>
-        <label for="host">Sandbox Domain:</label>
-        <input type="text" id="host" v-model="domain">
-        <label for="login">Username:</label>
-        <input type="text" v-model="login">
-        <label for="password">Password:</label>
-        <input type="password" v-model="password">
-        <button @click="addSandbox">Add</button>
+        <row>
+            <ul>
+                <li v-for="(sandbox, index) in sandboxes" :key="index">
+                    <a @click="openSandbox(sandbox)" href="#">{{sandbox.domain}}</a>
+                    <button @click="removeSandbox(index)">X</button>
+                </li>
+            </ul>
+        </row>
+        <row>
+            <l-input type="text" id="host" placeholder="Sandbox Domain" v-model="domain"/>
+        </row>
+        <row>
+            <l-input type="text" placeholder="Username" v-model="login"/>
+        </row>
+        <row>
+            <l-input type="password" placeholder="Password" v-model="password"/>
+        </row>
+        <l-button @click="addSandbox">Add</l-button>
     </div>
 </template>
 
@@ -26,20 +31,27 @@
             password: ''
         }),
         methods: {
-            addSandbox: function() {
+            addSandbox() {
                 this.sandboxes.push({
                     domain: this.domain,
                     login: this.login,
                     password: this.password
                 });
                 this.save();
+                this.clearForm();
             },
-            removeSandbox: function(index) {
+            removeSandbox(index) {
                 this.sandboxes.splice(index, 1);
                 this.save();
             },
-            save: function() {
+            clearForm() {
+                this.login = this.domain = this.password = '';
+            },
+            save() {
                 localStorage.sandboxes = JSON.stringify(this.sandboxes);
+            },
+            openSandbox(sandbox) {
+                chrome.tabs.create({url: `/app.html?domain=${sandbox.domain}`});
             }
         },
     }
@@ -51,8 +63,17 @@
     @import '../css/fa-regular.css';
     @import url('https://fonts.googleapis.com/css?family=Lato');
 
-    body {
-        margin: 0px;
+    .container {
+        padding: 15px;
+        width: 400px;
+        font-size: $font-size-base;
         //font-family: 'Lato', sans-serif;
+
+        label {
+            display: block;
+            line-height: 40px;
+            text-align: right;
+            padding: 0 15px;
+        }
     }
 </style>

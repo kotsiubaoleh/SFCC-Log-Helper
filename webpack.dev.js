@@ -8,12 +8,10 @@ module.exports = merge(webpackBase, {
     devtool: '#inline-source-map',
     plugins: [
         new ExtensionReloader({
-            port: 9090, // Which port use to create the server
-            reloadPage: true, // Force the reload of the page also
-            entries: { // The entries used for the content/background scripts
+            entries: {
                 popup: 'popup',
-                contentScript: 'content', // Use the entry names, not the file name or the path
-                background: 'background' // *REQUIRED
+                app: 'app',
+                background: 'background'
             }
         })
     ]
