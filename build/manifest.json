@@ -15,7 +15,8 @@
         "webRequestBlocking",
         "https://*.demandware.net/",
         "http://*.demandware.net/",
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "manifest_version": 2
 }

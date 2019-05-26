@@ -54,7 +54,9 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.common.js'
-        }
+        },
+        mainFiles: ['index', '_index'],
+        extensions: ['.vue', '.js', '.scss']
     },
     plugins: [
         new MiniCssExtractPlugin({

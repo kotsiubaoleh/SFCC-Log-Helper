@@ -23,12 +23,10 @@
             const sandbox = sandboxes.find((sandbox) => sandbox.domain === domain);
 
             const headers = new Headers({
-                'Accept': '*/*',
                 'Authorization': 'Basic ' + btoa(sandbox.login + ':' + sandbox.password),
                 'Depth': 1,
-                'Origin': ''
             });
-            fetch(`https://${domain}/on/demandware.servlet/webdav/Sites/Cartridges/o_kotsiuba`, 
+            fetch(`https://${domain}/on/demandware.servlet/webdav/Sites/Logs`, 
                 {
                     method: "PROPFIND",
                     headers
@@ -40,18 +38,6 @@
 </script>
 
 <style lang="scss">
-    @import '../css/variables.scss';
-    @import '../css/fontawesome.css';
-    @import '../css/fa-regular.css';
+    @import '../styles';
     @import url('https://fonts.googleapis.com/css?family=Lato');
-
-    body {
-        margin: 0px;
-        //font-family: 'Lato', sans-serif;
-    }
-
-    .raw-log {
-        word-wrap: break-word;
-        white-space: pre-wrap;
-    }
 </style>

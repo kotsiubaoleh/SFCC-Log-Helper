@@ -1,9 +1,11 @@
 import Vue from 'vue';
 
-import lInput from './l-input.vue';
-import lButton from './l-button.vue';
+import baseInput from './base-input.vue';
+import baseButton from './base-button.vue';
+import baseForm from './base-form.vue';
 import row from './row.vue';
 
-Vue.component('l-input', lInput);
-Vue.component('l-button', lButton);
+Vue.component('base-input', baseInput);
+Vue.component('base-button', baseButton);
+Vue.component('base-form', baseForm);
 Vue.component('row', row);

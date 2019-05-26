@@ -18,7 +18,6 @@ export default {
 <style lang="scss">
     .row {
         display: flex;
-        margin-bottom: 20px;
 
         @each $value in (flex-end, center, space-between, space-around, space-evenly) {
             &.justify-#{$value} {
@@ -30,6 +29,10 @@ export default {
             &.align-#{$value} {
                 align-items: $value;
             }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 20px
         }
     }
 </style>
