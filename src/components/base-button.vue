@@ -2,6 +2,7 @@
     <button 
         @click="onClick" 
         class="button"
+        :type="submit ? 'submit' : 'button'"
         :class="[
             type ? `button-type-${type}` : '',
             size ? `button-size-${size}` : '',
@@ -18,6 +19,7 @@
 <script>
 export default {
     props: {
+        submit: Boolean,
         type: String,
         icon: String,
         circle: Boolean,

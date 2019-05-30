@@ -6,6 +6,7 @@
 <script>
     import logList from '../components/log-list.vue';
     import mainMenu from '../components/main-menu.vue';
+    import XML from '../js/util/xml';
 
     export default {
         name: 'App',
@@ -18,21 +19,29 @@
             mainMenu
         },
         mounted() {
-            const domain = location.search.split('=')[1];
-            const sandboxes = JSON.parse(localStorage.sandboxes);
-            const sandbox = sandboxes.find((sandbox) => sandbox.domain === domain);
+            const sandboxIndex = location.search.split('=')[1];
+            let sandboxes = chrome.storage.sync.get('sandboxes', (result) => {
+                const sandbox = result.sandboxes[sandboxIndex];
 
-            const headers = new Headers({
-                'Authorization': 'Basic ' + btoa(sandbox.login + ':' + sandbox.password),
-                'Depth': 1,
+                const headers = new Headers({
+                    'Authorization': 'Basic ' + btoa(sandbox.login + ':' + sandbox.password),
+                    'Depth': 1,
+                });
+                fetch(`https://${sandbox.domain}/on/demandware.servlet/webdav/Sites/Logs`, 
+                    {
+                        method: "PROPFIND",
+                        headers
+                    })
+                    .catch(error => console.log(error))
+                    .then(response => response.text())
+                    .then(responseText => {
+                        window.text = responseText;
+                        window.xml = new XML(window.text);
+                        for (let response of window.xml.multistatus.response) {
+                            console.log(response.href.text())
+                        }
+                    });
             });
-            fetch(`https://${domain}/on/demandware.servlet/webdav/Sites/Logs`, 
-                {
-                    method: "PROPFIND",
-                    headers
-                })
-                .then(response => response.text())
-                .then(responseText => this.response = responseText);
         }
     }
 </script>

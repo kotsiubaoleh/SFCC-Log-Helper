@@ -67,6 +67,13 @@ export default {
 
     $input-horizontal-padding: 15px;
     
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
     .base-input {
         position: relative;
         width: 100%;
