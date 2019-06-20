@@ -1,7 +1,7 @@
 const parser = new DOMParser();
 
 const nodePrototype = {
-    length() {
+    size() {
         return this.selection.length;
     },
     toString() {
@@ -9,7 +9,7 @@ const nodePrototype = {
         if (element instanceof Document) {
             return element.firstElementChild.outerHTML 
         } else {
-            return this.selection[0].innerHTML;
+            return element.innerHTML;
         }
     },
     text() {
@@ -51,7 +51,6 @@ function selectFromChildren(elem, tag) {
 function createXMLNode(selection) {
     const node = function () {return};
     Object.setPrototypeOf(node, nodePrototype);
-    delete node.length;
     node.selection = selection; 
     return node;
 }
@@ -76,10 +75,12 @@ function getHandler (target, prop) {
     return new Proxy(node, {get: getHandler, apply: applyHandler});
 }
 
-export default class XML {
-    constructor(input) {
+const XML = {
+    parse(input) {
         const dom = parser.parseFromString(input, 'application/xml');
         const rootNode = createXMLNode([dom]);
         return new Proxy(rootNode, {get: getHandler});
     }
 }
+
+export default XML;

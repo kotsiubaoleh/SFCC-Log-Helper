@@ -4,7 +4,8 @@
   "description": "Chrome extension that helps to manage SFCC log files",
   "main": "index.js",
   "dependencies": {
-    "npm": "^6.9.0"
+    "npm": "^6.9.0",
+    "sax": "^1.2.4"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
