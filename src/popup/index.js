@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import popup from './popup.vue';
-import '../components';
+import '@app/components';
 
 new Vue({
     el: "#root",

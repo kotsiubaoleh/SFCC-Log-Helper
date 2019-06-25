@@ -6,6 +6,7 @@ const PATH = {
 }
 const MAPPING = {
     LOG_FILE: {
+        href: 'href',
         creationdate: 'creationDate',
         getlastmodified: 'lastModDate',
         displayname: 'name',
@@ -71,7 +72,11 @@ async function parseDirectoryResponse(stream) {
     parser.ontext = function(text) {
         const prop = MAPPING.LOG_FILE[currentTagName]
         if (prop) {
-            currentFileObject[prop] = text;
+            if (prop === 'lastModDate' || prop === 'creationDate') {
+                currentFileObject[prop] = new Date(text);
+            } else {
+                currentFileObject[prop] = text;
+            }
         }
     }
 

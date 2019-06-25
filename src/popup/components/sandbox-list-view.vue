@@ -1,40 +1,34 @@
 <template>
-    <div>
-        <row v-if="sandboxes.length > 0" justify="center">
-            <h1>Select a sandbox:</h1>
-        </row>
-        <row v-else justify="center">
-            <h1>There are no sandboxes saved</h1>
-        </row>
-        <row>
-            <transition-group tag="ul" name="fade" class="sandboxes-list">
-                <li class="sandbox-list-item" v-for="(sandbox, index) in sandboxes" :key="index" >
-                    <a class="link" @click.prevent="$emit('open-sandbox', index)" href="#">{{sandbox.name}}</a>
-                    <span class="item-controls">
-                        <base-button
-                            @click="$emit('edit-sandbox', index)"
-                            icon="edit"
-                            type="text"
-                            size="large"
-                        />
-                        <base-button
-                            @click="$emit('remove-sandbox', index)"
-                            icon="trash-alt"
-                            type="text"
-                            size="large"
-                        />
-                    </span>
-                </li>
-            </transition-group>
-        </row>
-        <row class="justify-center">
+    <div class="sandbox-list-view ">
+        <h1 v-if="sandboxes.length > 0">Select a sandbox:</h1>
+        <h1  v-else >There are no sandboxes saved</h1>
+        <transition-group tag="ul" name="fade" class="sandboxes-list">
+            <li class="sandbox-list-item" v-for="(sandbox, index) in sandboxes" :key="index" >
+                <a class="link" @click.prevent="$emit('open-sandbox', index)" href="#">{{sandbox.name}}</a>
+                <span class="item-controls">
+                    <base-button
+                        @click="$emit('edit-sandbox', index)"
+                        icon="edit"
+                        type="text"
+                        size="large"
+                    />
+                    <base-button
+                        @click="$emit('remove-sandbox', index)"
+                        icon="trash-alt"
+                        type="text"
+                        size="large"
+                    />
+                </span>
+            </li>
+        </transition-group>
+        <div class="controls">
             <base-button
                 class='add-button'
                 @click="$emit('add-sandbox')"
             >
                 Add new sandbox
             </base-button>
-        </row> 
+        </div>
     </div>
 </template>
 
@@ -51,6 +45,19 @@ export default {
 
     $item-height: 50px;
 
+    .sandbox-list-view {
+        h1 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .controls {
+            display: flex;
+            margin-top: 15px;
+            justify-content: center;
+        }
+    }
+
     .sandboxes-list {
         position: relative;
         list-style: none;
@@ -64,7 +71,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             height: $item-height;
-            border-bottom: 1px solid $color-border;
+            border-bottom: 1px solid map-get($color,  "border");
             width: 100%;
             transition: border-color, background-color 0.2s;
 
@@ -96,9 +103,9 @@ export default {
                 width: 100%;
                 flex-grow: 2;
                 line-height: $item-height;
-                font-size: $font-size-base;
+                font-size: map-get($font-size,  "base");
                 text-decoration: none;
-                color: $color-text;
+                color: map-get($color,  "text");
             }
             
 
@@ -107,11 +114,11 @@ export default {
             }
 
             &:hover {
-                border-color: $color-active-border;
-                background-color: $color-active-background;
+                border-color: map-get($color,  "active-border");
+                background-color: map-get($color,  "active-background");
 
                 .link {
-                    color: $color-active-text;
+                    color: map-get($color,  "active-text");
                 }
                 .item-controls {
                     display: flex;

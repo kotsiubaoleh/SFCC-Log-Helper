@@ -77,16 +77,16 @@ export default {
     .base-input {
         position: relative;
         width: 100%;
-        color: $color-text;
+        color: map-get($color,  "text");
 
         .input {
             display: inline-block;
-            color: $color-text;
+            color: map-get($color,  "text");
             width: 100%;
             vertical-align: bottom;
-            font-size: $font-size-base;
+            font-size: map-get($font-size,  "base");
             background-color: transparent;
-            border: 1px solid $color-border;
+            border: 1px solid map-get($color,  "border");
             border-radius: 4px;
             height: 40px;
             line-height: 40px;
@@ -95,18 +95,18 @@ export default {
 
             &:focus {
                 outline: none;
-                border-color: $color-active-border;
+                border-color: map-get($color,  "active-border");
             }
 
             &.error {
-                border-color: $color-error;
+                border-color: map-get($color,  "error");
             }
         }
 
         .placeholder {
             z-index: -1;
             position: absolute;
-            color: $color-text-light;
+            color: map-get($color,  "text-light");
             transform: translateY(-50%);
             top: 50%;
             left: $input-horizontal-padding;
@@ -121,12 +121,12 @@ export default {
             transform: translate(-5px, -27px); 
             font-size: 12px;
             z-index: 0;
-            color: $color-active-text;
-            background-color: $color-background;
+            color: map-get($color,  "active-text");
+            background-color: map-get($color,  "background");
         }
 
         .input.error+.placeholder{
-            color: $color-error
+            color: map-get($color, "error");
         }
     }
 </style>

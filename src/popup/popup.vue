@@ -87,15 +87,15 @@
     }
 
     h1 {
-        font-size: $font-size-large;
+        font-size: map-get($font-size,  "large");
         margin: 0;
     }
 
     .popup-container {
         padding: 15px;
         width: 400px;
-        font-size: $font-size-base;
-        color: $color-text;
+        font-size: map-get($font-size,  "base");
+        color: map-get($color,  "text");
 
         label {
             display: block;

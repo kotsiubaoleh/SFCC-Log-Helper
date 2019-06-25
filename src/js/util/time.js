@@ -1,10 +1,13 @@
 export default {
-    toTimeString: function(date) {
-        return `${padLeft(date.getHours(),2)}:${padLeft(date.getMinutes(),2)}:${padLeft(date.getSeconds(),2)}.${padLeft(date.getMilliseconds(),3)}`;
+    toTimeString: function(date, showMilliseconds = true) {
+        return `${padLeft(date.getHours(),2)}:\
+        ${padLeft(date.getMinutes(),2)}:\
+        ${padLeft(date.getSeconds(),2)}\
+        ${showMilliseconds ? '.' + padLeft(date.getMilliseconds(),3) : ''}`;
     },
 
-    toDateTimeString: function(date) {
-        return `${date.getYear()}-${date.getMonth()}-${date.getDate()} ${this.toTimeString(date)}`;
+    toDateTimeString: function(date, showMilliseconds = true) {
+        return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${this.toTimeString(date, showMilliseconds)}`;
     },
 
     isToday: function(date) {

@@ -1,12 +1,14 @@
 <template>
-    <div class="container" v-html="response">
-        
+    <div class="container">
+        <side-menu>
+            <file-list :files="logFiles"/>
+        </side-menu>
     </div>
-</template>
+</template> 
 
 <script>
-    import logList from '../components/log-list.vue';
-    import mainMenu from '../components/main-menu.vue';
+    import sideMenu from './components/side-menu';
+    import fileList from './components/file-list';
     import WebDAVClient from '../js/util/webdav';
     import storage from '../js/util/storage';
 
@@ -14,11 +16,12 @@
         name: 'App',
         data: () => ({
             response: '',
-            isTurnedOn: true
+            isTurnedOn: true,
+            logFiles: []
         }),
         components: {
-            logList,
-            mainMenu
+            fileList,
+            sideMenu
         },
         async mounted() {
             const sandboxIndex = location.search.split('=')[1];
@@ -37,4 +40,8 @@
 <style lang="scss">
     @import '../styles';
     @import url('https://fonts.googleapis.com/css?family=Lato');
+
+    body {
+        margin: 0;
+    }
 </style>

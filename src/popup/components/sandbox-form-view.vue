@@ -1,47 +1,41 @@
 <template>
-    <div>
+    <div class="sandbox-form-view">
         <base-form ref="form" @submit.prevent="state === 'editing' ? saveChanges : addSandbox">
-            <row v-if="state === 'adding'">
-                Adding new sandbox:
-            </row>
-            <row v-if="state === 'editing'">
-                Editing sandbox:
-            </row>
-            <row>
-                <base-input
-                    type="text"
-                    id="host"
-                    placeholder="Name"
-                    v-model="name"
-                    validation="required"
-                />
-            </row>
-            <row>
-                <base-input
-                    type="text"
-                    id="host"
-                    placeholder="Sandbox Domain"
-                    v-model="domain"
-                    validation="required"
-                />
-            </row>
-            <row>
-                <base-input
-                    type="text"
-                    placeholder="Username"
-                    v-model="login"
-                    validation="required"
-                />
-            </row>
-            <row>
-                <base-input
-                    type="password"
-                    placeholder="Password"
-                    v-model="password"
-                    validation="required"
-                />
-            </row>
-            <row class="justify-space-between">
+            <div class="state-title">
+                <template v-if="state === 'adding'">
+                    Adding new sandbox:
+                </template>
+                <template v-if="state === 'editing'">
+                    Editing sandbox:
+                </template>
+            </div>
+            <base-input
+                type="text"
+                id="host"
+                placeholder="Name"
+                v-model="name"
+                validation="required"
+            />
+            <base-input
+                type="text"
+                id="host"
+                placeholder="Sandbox Domain"
+                v-model="domain"
+                validation="required"
+            />
+            <base-input
+                type="text"
+                placeholder="Username"
+                v-model="login"
+                validation="required"
+            />
+            <base-input
+                type="password"
+                placeholder="Password"
+                v-model="password"
+                validation="required"
+            />
+            <div class="controls">
                 <base-button
                     @click="cancel"
                 >
@@ -63,7 +57,7 @@
                 >
                     Save
                 </base-button>
-            </row>
+            </div>
         </base-form>
     </div>
 </template>
@@ -120,6 +114,20 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    .sandbox-form-view {
+        .state-title {
+            margin-bottom: 15px
+        }
 
+        .controls {
+            display: flex;
+            margin-top: 15px;
+            justify-content: space-around;
+        }
+
+        .base-input:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
 </style>
