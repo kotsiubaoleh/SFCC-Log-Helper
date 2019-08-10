@@ -123,6 +123,7 @@ export default class WebDAVClient{
             let processedSize = 0;
             for (let chunk of chunks) {
                 responseData.set(chunk, processedSize);
+                processedSize += chunk.length;
             }
             return new TextDecoder().decode(responseData);
         }
