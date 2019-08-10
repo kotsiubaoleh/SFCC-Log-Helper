@@ -6,7 +6,7 @@ const PATH = {
 }
 const MAPPING = {
     LOG_FILE: {
-        href: 'href',
+        href: 'path',
         creationdate: 'creationDate',
         getlastmodified: 'lastModDate',
         displayname: 'name',
@@ -103,5 +103,28 @@ export default class WebDAVClient{
         const response = await fetch(PROTOCOL + this.domain + PATH.ROOT_DIR, { method: "PROPFIND", headers: this.headers });
         const files = await parseDirectoryResponse(response.body);
         return files;
+    }
+
+    async fetchFileContent(path, progressCallback) {
+        const response = await fetch(PROTOCOL + this.domain + path, { method: "GET", headers: this.headers });
+        if (!progressCallback) {
+            return await response.text();
+        } else {
+            const stream = makeStreamIterable(response.body);
+            const chunks = [];
+            let downloadedSize = 0;
+            for await (let chunk of stream) {
+                chunks.push(chunk);
+                downloadedSize += chunk.length;
+                progressCallback(downloadedSize);
+            }
+            const totalSize = chunks.reduce((size, chunk) => size + chunk.length, 0);
+            const responseData = new Uint8Array(totalSize);
+            let processedSize = 0;
+            for (let chunk of chunks) {
+                responseData.set(chunk, processedSize);
+            }
+            return new TextDecoder().decode(responseData);
+        }
     }
 }

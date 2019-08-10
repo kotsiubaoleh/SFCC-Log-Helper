@@ -6,10 +6,15 @@
             :class="{'error': (touched || forceValidation) && !isValid()}"
             :value="value" 
             @input="handleInput"
-            @blur="handleBlur" 
-            v-if="placeholder" 
+            @blur="handleBlur"
         >
-        <span class="placeholder" :class="{'has-value': value}">{{placeholder}}</span>
+        <span
+            v-if="placeholder"
+            class="placeholder"
+            :class="{'has-value': value}"
+        >
+            {{placeholder}}
+        </span>
     </div>
 </template>
 
@@ -77,16 +82,16 @@ export default {
     .base-input {
         position: relative;
         width: 100%;
-        color: map-get($color,  "text");
+        color: color("text");
 
         .input {
             display: inline-block;
-            color: map-get($color,  "text");
+            color: color("text");
             width: 100%;
             vertical-align: bottom;
             font-size: map-get($font-size,  "base");
             background-color: transparent;
-            border: 1px solid map-get($color,  "border");
+            border: 1px solid color("border");
             border-radius: 4px;
             height: 40px;
             line-height: 40px;
@@ -95,18 +100,18 @@ export default {
 
             &:focus {
                 outline: none;
-                border-color: map-get($color,  "active-border");
+                border-color: color("active-border");
             }
 
             &.error {
-                border-color: map-get($color,  "error");
+                border-color: color("error");
             }
         }
 
         .placeholder {
             z-index: -1;
             position: absolute;
-            color: map-get($color,  "text-light");
+            color: color("text-light");
             transform: translateY(-50%);
             top: 50%;
             left: $input-horizontal-padding;
@@ -121,12 +126,12 @@ export default {
             transform: translate(-5px, -27px); 
             font-size: 12px;
             z-index: 0;
-            color: map-get($color,  "active-text");
-            background-color: map-get($color,  "background");
+            color: color("active-text");
+            background-color: color("background");
         }
 
         .input.error+.placeholder{
-            color: map-get($color, "error");
+            color: color("error");
         }
     }
 </style>

@@ -1,4 +1,4 @@
-$color: (
+$colors: (
     background: #fff,
     border: #dcdfe6,
     text: #606266,
@@ -6,10 +6,29 @@ $color: (
     active-background: #ecf5ff,
     active-border: #c6e2ff,
     active-text: #409eff,
-    error: #e46b6b
+    disabled-text: #e5e5e7,
+    selected-background: #deeeff,
+
+);
+
+$indicator-colors: (
+    error: #e46b6b,
+    warn: #f5ce63,
+    debug: #b2fa83,
+    info: #83d3f3,
+    message: #9d9cf7
 );
 
 $font-size: (
     base: 16px,
+    big: 18px,
     large: 20px
 );
+
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
+
+@function indicator-color($color-name) {
+    @return map-get($indicator-colors, $color-name);
+}

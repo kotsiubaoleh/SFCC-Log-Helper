@@ -71,7 +71,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             height: $item-height;
-            border-bottom: 1px solid map-get($color,  "border");
+            border-bottom: 1px solid color("border");
             width: 100%;
             transition: border-color, background-color 0.2s;
 
@@ -105,7 +105,7 @@ export default {
                 line-height: $item-height;
                 font-size: map-get($font-size,  "base");
                 text-decoration: none;
-                color: map-get($color,  "text");
+                color: color("text");
             }
             
 
@@ -114,11 +114,11 @@ export default {
             }
 
             &:hover {
-                border-color: map-get($color,  "active-border");
-                background-color: map-get($color,  "active-background");
+                border-color: color("active-border");
+                background-color: color("active-background");
 
                 .link {
-                    color: map-get($color,  "active-text");
+                    color: color("active-text");
                 }
                 .item-controls {
                     display: flex;

@@ -95,7 +95,7 @@
         padding: 15px;
         width: 400px;
         font-size: map-get($font-size,  "base");
-        color: map-get($color,  "text");
+        color: color("text");
 
         label {
             display: block;

@@ -11,7 +11,7 @@
     >
         <span>
             <slot></slot>
-            <i v-if="icon" :class="`far fa-${icon}`"/>
+            <i v-if="icon" :class="`${iconType} fa-${icon}`"/>
         </span>
     </button>
 </template>
@@ -22,6 +22,10 @@ export default {
         submit: Boolean,
         type: String,
         icon: String,
+        iconType: {
+            type: String,
+            default: 'far'
+        },
         circle: Boolean,
         size: String
     },
@@ -37,9 +41,9 @@ export default {
     @import '../styles';
 
     .base-button {
-        color: map-get($color, "text");
-        background: map-get($color,  "background");
-        border: 1px solid map-get($color,  "border");
+        color: color("text");
+        background: color("background");
+        border: 1px solid color("border");
         padding: 12px 20px;
         line-height: 1;
         border-radius: 4px;
@@ -48,13 +52,13 @@ export default {
 
         &:focus {
             outline: none;
-            border-color: map-get($color, "active-border");
+            border-color: color("active-border");
         }
 
         &:hover {
-            color: map-get($color, "active-text");
-            border-color: map-get($color, "active-border");
-            background-color: map-get($color, "active-background");
+            color: color("active-text");
+            border-color: color("active-border");
+            background-color: color("active-background");
         }
 
         &.circle {
@@ -70,6 +74,10 @@ export default {
 
         &.button-size-large {
             font-size: map-get($font-size,  "large");
-        } 
+        }
+
+        &:disabled {
+            color: color("disabled-text");
+        }
     }
 </style>
