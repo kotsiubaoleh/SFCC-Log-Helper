@@ -4,7 +4,7 @@
   "description": "Chrome extension that helps to manage SFCC log files",
   "main": "index.js",
   "dependencies": {
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "resolve-url-loader": "^3.1.0",
     "sax": "^1.2.4"
   },
